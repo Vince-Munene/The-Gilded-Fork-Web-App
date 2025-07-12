@@ -16,6 +16,22 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [menuCategory, setMenuCategory] = useState('starters');
   const [scrollTarget, setScrollTarget] = useState(null);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark';
+    }
+    return false;
+  });
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -57,7 +73,7 @@ export default function App() {
   if (currentPage === 'order') {
     return (
       <>
-        <Header setPage={handleNavigation} currentPage={currentPage} />
+        <Header setPage={handleNavigation} currentPage={currentPage} darkMode={darkMode} setDarkMode={setDarkMode} />
         <Order setPage={handleNavigation} />
         <Footer />
       </>
@@ -71,7 +87,7 @@ export default function App() {
   // Default home page
   return (
     <>
-      <Header setPage={handleNavigation} currentPage={currentPage} />
+      <Header setPage={handleNavigation} currentPage={currentPage} darkMode={darkMode} setDarkMode={setDarkMode} />
       <div className='w-screen h-full m-auto' id="home">
         <Carousel slides={slides}/>
       </div>

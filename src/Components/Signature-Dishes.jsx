@@ -2,7 +2,7 @@ export default function SigDishes() {
   return (
     <div id="signature-dishes">
       <div className="text-center p-6 bg-paleyellow">
-        <h4 className="font-jaro text-4xl">Signature Dishes</h4>
+        <h4 className="font-jaro text-4xl dark:text-white">Signature Dishes</h4>
       </div>
 
       <div

@@ -4,3 +4,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .bg-paleyellow {
+    @apply dark:bg-[#23232b];
+  }
+  .bg-FAFADE {
+    @apply dark:bg-[#23232b];
+  }
+  .bg-faf8e6 {
+    @apply dark:bg-[#23232b];
+  }
+  .bg-white {
+    @apply dark:bg-[#23232b] dark:text-white;
+  }
+  .text-black {
+    @apply dark:text-white;
+  }
+}
+
+html {
+  @apply bg-paleyellow text-black dark:bg-[#18181b] dark:text-white;
+}

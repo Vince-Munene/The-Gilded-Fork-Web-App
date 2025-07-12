@@ -22,8 +22,8 @@ function ChatSmileyIcon() {
 export default function Footer() {
   const [showChat, setShowChat] = useState(false);
   return (
-    <footer className="w-full bg-[#faf8e6] pt-8 pb-4 px-2 md:px-0 relative" style={inderFont}>
-      <div className="max-w-5xl mx-auto grid grid-cols-1 grid-rows-4 lg:grid-cols-2 lg:grid-rows-2 gap-8 items-start">
+    <footer className="w-full bg-[#faf8e6] dark:bg-[#232b38] pt-8 pb-4 px-2 md:px-0 relative" style={inderFont}>
+      <div className="max-w-5xl mx-auto grid grid-cols-1 grid-rows-4 lg:grid-cols-2 lg:grid-rows-2 gap-8 items-start text-black dark:text-white">
         {/* Left Column: Logo/Info/Socials (top), Contact/Hours (bottom) */}
         <div className="flex flex-col items-center gap-3 row-start-1 col-start-1">
           <div className="rounded-2xl w-20 h-20 flex items-center justify-center mb-2">
@@ -76,7 +76,7 @@ export default function Footer() {
         </div>
       </div>
       <button
-        className="fixed bottom-8 right-8 bg-white border border-gray-300 rounded-full w-14 h-14 flex items-center justify-center z-50 hover:bg-yellow-400 transition"
+        className="fixed bottom-8 right-8 bg-white dark:bg-[#6b8bbd] border border-gray-300 rounded-full w-14 h-14 flex items-center justify-center z-50 hover:bg-yellow-400 dark:hover:bg-[#4a6a96] transition"
         aria-label="Open chat"
         style={{boxShadow: 'none'}}
         onClick={() => setShowChat(true)}
