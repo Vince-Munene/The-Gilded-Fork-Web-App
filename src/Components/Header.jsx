@@ -42,7 +42,22 @@ function MenuDropdown({ setPage }) {
   );
 }
 
-function Header({ setPage }) {
+function Header({ setPage, currentPage }) {
+  // Helper to handle scroll and exit order page if needed
+  function handleNav(e, section) {
+    e.preventDefault();
+    if (currentPage === 'order') {
+      setPage('home');
+      setTimeout(() => {
+        const el = document.getElementById(section);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+    } else {
+      const el = document.getElementById(section);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
   return (
     <nav className="bg-paleyellow py-4 px-8 rounded-t-xl">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -53,11 +68,11 @@ function Header({ setPage }) {
 
         <div className="flex-1 flex justify-center">
           <div className="flex space-x-8 font-jaro text-[15px] text-black items-center">
-            <button onClick={() => setPage('home')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Home</button>
+            <a href="#home" onClick={e => handleNav(e, 'home')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Home</a>
             <MenuDropdown setPage={setPage} />
-            <button onClick={() => setPage('about')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Our Story</button>
-            <button onClick={() => setPage('signature-dishes')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Signature Dishes</button>
-            <button onClick={() => setPage('feedback')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Feedback</button>
+            <a href="#our-story" onClick={e => handleNav(e, 'our-story')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Our Story</a>
+            <a href="#signature-dishes" onClick={e => handleNav(e, 'signature-dishes')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Signature Dishes</a>
+            <a href="#feedback" onClick={e => handleNav(e, 'feedback')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Feedback</a>
             <button onClick={() => setPage('order')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Order</button>
           </div>
         </div>
