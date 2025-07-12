@@ -5,7 +5,6 @@ function MenuDropdown({ setPage }) {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -47,11 +46,11 @@ function Header({ setPage }) {
   return (
     <nav className="bg-paleyellow py-4 px-8 rounded-t-xl">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
+
         <div className="flex items-center">
           <img src={Logo} alt="Logo" className="w-10 h-10 rounded-lg bg-[#353744] p-1" />
         </div>
-        {/* Navigation Links */}
+
         <div className="flex-1 flex justify-center">
           <div className="flex space-x-8 font-jaro text-[15px] text-black items-center">
             <button onClick={() => setPage('home')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Home</button>
@@ -62,22 +61,33 @@ function Header({ setPage }) {
             <button onClick={() => setPage('order')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Order</button>
           </div>
         </div>
-        {/* Sun Icon */}
+  
         <div className="flex items-center">
           <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-transparent">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 24 24" width="28" height="28">
-              <circle cx="12" cy="12" r="5" />
-              <g stroke="black" strokeWidth="2">
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </g>
-            </svg>
+           <svg
+            width="35"
+            height="35"
+            viewBox="0 0 70 70"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M44.3915 17.5875L51.7707 11.9292L42.4665 11.6667L39.3748 2.91667L36.2832 11.6667L26.979 11.9292L34.3582 17.5875L31.704 26.5125L39.3748 21.2333L47.0457 26.5125L44.3915 17.5875Z"
+              fill="black"
+            />
+            <path
+              d="M57.1958 35.7292L61.9792 32.0833L55.9708 31.9375L53.9583 26.25L51.9458 31.9375L45.9375 32.0833L50.7208 35.7292L49 41.5042L53.9583 38.0917L58.9167 41.5042L57.1958 35.7292Z"
+              fill="black"
+            />
+            <path
+              d="M20.4167 17.5C20.4167 35.2333 34.7667 49.5833 52.5 49.5833C54.0458 49.5833 55.5625 49.4667 57.05 49.2625C52.3542 56.4667 44.2458 61.25 35 61.25C20.5042 61.25 8.75 49.4958 8.75 35C8.75 25.7542 13.5333 17.6458 20.7375 12.95C20.5333 14.4375 20.4167 15.9542 20.4167 17.5Z"
+              fill="black"
+              stroke="black"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
           </span>
         </div>
       </div>
