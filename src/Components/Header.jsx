@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import Logo from '/assets/gilded-fork-logo.jpg';
 
 function MenuDropdown({ setPage }) {
   const [open, setOpen] = useState(false);
@@ -63,7 +62,7 @@ function Header({ setPage, currentPage, darkMode, setDarkMode }) {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         <div className="flex items-center">
-          <img src={Logo} alt="Logo" className="w-10 h-10 rounded-lg bg-[#353744] p-1" />
+          <img src="/assets/gilded-fork-logo.jpg" alt="Logo" className="w-10 h-10 rounded-lg bg-[#353744] p-1" />
         </div>
 
         <div className="flex-1 flex justify-center">

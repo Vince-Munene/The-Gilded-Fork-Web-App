@@ -1,6 +1,5 @@
 import React from 'react';
 import { FaRegCommentDots } from 'react-icons/fa';
-import storyImg from '/assets/story-img.jpg';
 
 const tabs = [
   { label: 'Heritage', color: '#b9976b' },
@@ -22,7 +21,7 @@ export default function OurStory() {
       <div className="max-w-3xl mx-auto flex flex-col md:flex-row items-stretch gap-6 md:gap-8">
         <div className="w-full md:w-1/2 flex-shrink-0 flex items-stretch">
           <img
-            src={storyImg}
+            src="/assets/story-img.jpg"
             alt="Our Story Dish"
             className="w-full h-full object-cover rounded-xl md:rounded-xl"
             style={{ borderRadius: '16px', boxShadow: 'none', minHeight: 180 }}

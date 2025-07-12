@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FaInstagram, FaXTwitter } from 'react-icons/fa6';
 import { SiGmail } from 'react-icons/si';
-import Logo from '/assets/gilded-fork-logo.jpg';
 import ChatbotModal from './ChatbotModal';
 
 const inderFont = { fontFamily: 'Inder, Arial, sans-serif' };
@@ -27,7 +26,7 @@ export default function Footer() {
         {/* Left Column: Logo/Info/Socials (top), Contact/Hours (bottom) */}
         <div className="flex flex-col items-center gap-3 row-start-1 col-start-1">
           <div className="rounded-2xl w-20 h-20 flex items-center justify-center mb-2">
-            <img src={Logo} alt="Logo" className="w-16 h-16 object-contain rounded-xl" />
+            <img src="/assets/gilded-fork-logo.jpg" alt="Logo" className="w-16 h-16 object-contain rounded-xl" />
           </div>
           <div className="text-center">
             <div className="text-lg font-bold" style={inderFont}>The Gilded Fork</div>
