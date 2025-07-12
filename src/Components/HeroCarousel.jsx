@@ -55,10 +55,10 @@ export default function Carousel({ slides }) {
                 className="flex flex-col items-center justify-center px-4 py-4 rounded-2xl"
                 style={{ background: colors[idx % colors.length], maxWidth: '28rem', width: '100%' }}
               >
-                <h1 className="text-4xl md:text-6xl font-bold text-yellow-300 shadow-2xl mb-2 text-center" style={{ fontFamily: 'cursive', minHeight: '3.5em', background: 'transparent' }}>
+                <h1 className="text-4xl md:text-6xl font-bold text-yellow-300 mb-2 text-center" style={{ fontFamily: 'cursive', minHeight: '3.5em', background: 'transparent' }}>
                   {text}
                 </h1>
-                <p className="text-white text-lg md:text-2xl mb-4 shadow-xl text-center" style={{ background: 'transparent' }}>
+                <p className="text-white text-lg md:text-2xl mb-4 text-center" style={{ background: 'transparent' }}>
                   Where Culinary Art Meets Timeless Tradition
                 </p>
                 <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-full shadow-xl transition">
