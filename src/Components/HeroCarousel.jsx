@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { FaArrowCircleRight, FaArrowCircleLeft } from 'react-icons/fa';
 
 const colors = [
@@ -15,24 +15,9 @@ export default function Carousel({ slides, setPage }) {
   const [texts, setTexts] = useState(['', '', '', '']);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const autoplayRef = useRef(null);
   const carouselRef = useRef(null);
 
-  const startAutoplay = () => {
-    if (autoplayRef.current) clearInterval(autoplayRef.current);
-    autoplayRef.current = setInterval(() => {
-      if (!isPaused && !isTransitioning) {
-        nextSlide();
-      }
-    }, 4000);
-  };
 
-  const stopAutoplay = () => {
-    if (autoplayRef.current) {
-      clearInterval(autoplayRef.current);
-      autoplayRef.current = null;
-    }
-  };
 
   const resetTypewriter = (slideIndex) => {
     setTexts(prev => {
@@ -42,14 +27,14 @@ export default function Carousel({ slides, setPage }) {
     });
   };
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     const nextIndex = current === slides.length - 1 ? 0 : current + 1;
     setCurrent(nextIndex);
     resetTypewriter(nextIndex);
     setTimeout(() => setIsTransitioning(false), 500);
-  };
+  }, [current, slides.length, isTransitioning]);
 
   const prevSlide = () => {
     if (isTransitioning) return;
@@ -61,9 +46,19 @@ export default function Carousel({ slides, setPage }) {
   };
 
   useEffect(() => {
-    startAutoplay();
-    return () => stopAutoplay();
-  }, [isPaused, isTransitioning]);
+    const interval = setInterval(() => {
+      setCurrent(prev => {
+        if (!isPaused && !isTransitioning) {
+          const nextIndex = prev === slides.length - 1 ? 0 : prev + 1;
+          resetTypewriter(nextIndex);
+          return nextIndex;
+        }
+        return prev;
+      });
+    }, 4000);
+    
+    return () => clearInterval(interval);
+  }, [isPaused, isTransitioning, slides.length]);
 
   useEffect(() => {
     const handleMouseEnter = () => setIsPaused(true);
@@ -95,6 +90,12 @@ export default function Carousel({ slides, setPage }) {
       return () => clearTimeout(timer);
     }
   }, [texts, current]);
+
+  useEffect(() => {
+    setIsTransitioning(true);
+    const timer = setTimeout(() => setIsTransitioning(false), 500);
+    return () => clearTimeout(timer);
+  }, [current]);
 
   return (
     <div 
