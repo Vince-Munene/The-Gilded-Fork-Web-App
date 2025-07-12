@@ -3,7 +3,7 @@ import Header from './Components/Header.jsx';
 import Feedback from './Components/Feedback.jsx';
 import SigDishes from './Components/Signature-Dishes.jsx';
 import Order from './Components/Order.jsx';
-
+import FullMenu from './Components/FullMenu.jsx'; 
 import Carousel from "./Components/HeroCarousel.jsx";
 import OurStory from "./Components/OurStory.jsx";
 import Footer from "./Components/Footer.jsx";
@@ -14,12 +14,8 @@ import img4 from '../assets/image4.jpg';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
-  const [scrollTarget, setScrollTarget] = useState(null);
-import FullMenu from './Components/FullMenu.jsx';
-
-export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
   const [menuCategory, setMenuCategory] = useState('starters');
+  const [scrollTarget, setScrollTarget] = useState(null);
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -28,13 +24,10 @@ export default function App() {
     }
   };
 
-
   const handleNavigation = (page, category = null) => {
     if (page === 'order') {
       setCurrentPage('order');
-
       setScrollTarget(null);
-
     } else if (page === 'menu') {
       setCurrentPage('menu');
       if (category) {
@@ -42,7 +35,6 @@ export default function App() {
       }
     } else if ((currentPage === 'order' || currentPage === 'menu') && page === 'home') {
       setCurrentPage('home');
-
     } else {
       setCurrentPage('home');
       setScrollTarget(page);
@@ -59,15 +51,10 @@ export default function App() {
       }
       setScrollTarget(null);
     }
-
   }, [currentPage, scrollTarget]);
 
-  
-    if (currentPage === 'menu') {
-      return <FullMenu setPage={handleNavigation} activeCategory={menuCategory} />;
-    }
-    
-
+  // Render different pages based on currentPage
+  if (currentPage === 'order') {
     return (
       <>
         <Header setPage={handleNavigation} currentPage={currentPage} />
@@ -76,7 +63,12 @@ export default function App() {
       </>
     );
   }
+  
+  if (currentPage === 'menu') {
+    return <FullMenu setPage={handleNavigation} activeCategory={menuCategory} />;
+  }
 
+  // Default home page
   return (
     <>
       <Header setPage={handleNavigation} currentPage={currentPage} />
