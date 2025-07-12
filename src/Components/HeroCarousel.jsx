@@ -10,9 +10,9 @@ const colors = [
 
 const name = 'The Gilded Fork';
 
-export default function Carousel({ slides }) {
+export default function Carousel({ slides, setPage }) {
   const [current, setCurrent] = useState(0);
-  const [text, setText] = useState('');
+  const [texts, setTexts] = useState(['', '', '', '']);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const autoplayRef = useRef(null);
@@ -34,17 +34,29 @@ export default function Carousel({ slides }) {
     }
   };
 
+  const resetTypewriter = (slideIndex) => {
+    setTexts(prev => {
+      const newTexts = [...prev];
+      newTexts[slideIndex] = '';
+      return newTexts;
+    });
+  };
+
   const nextSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setCurrent(prev => prev === slides.length - 1 ? 0 : prev + 1);
+    const nextIndex = current === slides.length - 1 ? 0 : current + 1;
+    setCurrent(nextIndex);
+    resetTypewriter(nextIndex);
     setTimeout(() => setIsTransitioning(false), 500);
   };
 
   const prevSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
-    setCurrent(prev => prev === 0 ? slides.length - 1 : prev - 1);
+    const prevIndex = current === 0 ? slides.length - 1 : current - 1;
+    setCurrent(prevIndex);
+    resetTypewriter(prevIndex);
     setTimeout(() => setIsTransitioning(false), 500);
   };
 
@@ -71,13 +83,18 @@ export default function Carousel({ slides }) {
   }, []);
 
   useEffect(() => {
-    if (text.length < name.length) {
+    const currentText = texts[current];
+    if (currentText.length < name.length) {
       const timer = setTimeout(() => {
-        setText(name.slice(0, text.length + 1));
+        setTexts(prev => {
+          const newTexts = [...prev];
+          newTexts[current] = name.slice(0, currentText.length + 1);
+          return newTexts;
+        });
       }, 100);
       return () => clearTimeout(timer);
     }
-  }, [text]);
+  }, [texts, current]);
 
   return (
     <div 
@@ -108,12 +125,21 @@ export default function Carousel({ slides }) {
                 style={{ background: colors[idx % colors.length], maxWidth: '28rem', width: '100%' }}
               >
                 <h1 className="text-4xl md:text-6xl font-bold text-yellow-300 mb-2 text-center" style={{ fontFamily: 'cursive', minHeight: '3.5em', background: 'transparent' }}>
-                  {text}
+                  {texts[idx]}
+                  <span className="animate-pulse">|</span>
                 </h1>
                 <p className="text-white text-lg md:text-2xl mb-4 text-center" style={{ background: 'transparent' }}>
                   Where Culinary Art Meets Timeless Tradition
                 </p>
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-full shadow-xl transition">
+                <button 
+                  onClick={() => {
+                    const element = document.getElementById('signature-dishes');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95"
+                >
                   Explore
                 </button>
               </div>
@@ -151,6 +177,7 @@ export default function Carousel({ slides }) {
               if (!isTransitioning && idx !== current) {
                 setIsTransitioning(true);
                 setCurrent(idx);
+                resetTypewriter(idx);
                 setTimeout(() => setIsTransitioning(false), 500);
               }
             }}
