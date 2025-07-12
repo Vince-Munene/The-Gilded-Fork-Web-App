@@ -3,6 +3,7 @@ import Header from './Components/Header.jsx';
 import Feedback from './Components/Feedback.jsx';
 import SigDishes from './Components/Signature-Dishes.jsx';
 import Order from './Components/Order.jsx';
+
 import Carousel from "./Components/HeroCarousel.jsx";
 import OurStory from "./Components/OurStory.jsx";
 import Footer from "./Components/Footer.jsx";
@@ -14,16 +15,41 @@ import img4 from '../assets/image4.jpg';
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [scrollTarget, setScrollTarget] = useState(null);
+import FullMenu from './Components/FullMenu.jsx';
 
-  const handleNavigation = (page) => {
+export default function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [menuCategory, setMenuCategory] = useState('starters');
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+
+  const handleNavigation = (page, category = null) => {
     if (page === 'order') {
       setCurrentPage('order');
+
       setScrollTarget(null);
+
+    } else if (page === 'menu') {
+      setCurrentPage('menu');
+      if (category) {
+        setMenuCategory(category);
+      }
+    } else if ((currentPage === 'order' || currentPage === 'menu') && page === 'home') {
+      setCurrentPage('home');
+
     } else {
       setCurrentPage('home');
       setScrollTarget(page);
     }
   };
+  
+  let slides = [img1, img2, img3, img4];
 
   useEffect(() => {
     if (currentPage === 'home' && scrollTarget) {
@@ -33,11 +59,15 @@ export default function App() {
       }
       setScrollTarget(null);
     }
+
   }, [currentPage, scrollTarget]);
 
-  let slides = [img1, img2, img3, img4];
+  
+    if (currentPage === 'menu') {
+      return <FullMenu setPage={handleNavigation} activeCategory={menuCategory} />;
+    }
+    
 
-  if (currentPage === 'order') {
     return (
       <>
         <Header setPage={handleNavigation} currentPage={currentPage} />
