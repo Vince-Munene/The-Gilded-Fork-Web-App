@@ -3,9 +3,11 @@ import Header from './Components/Header.jsx';
 import Feedback from './Components/Feedback.jsx';
 import SigDishes from './Components/Signature-Dishes.jsx';
 import Order from './Components/Order.jsx';
+import FullMenu from './Components/FullMenu.jsx';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [menuCategory, setMenuCategory] = useState('starters');
 
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -14,10 +16,15 @@ export default function App() {
     }
   };
 
-  const handleNavigation = (page) => {
+  const handleNavigation = (page, category = null) => {
     if (page === 'order') {
       setCurrentPage('order');
-    } else if (currentPage === 'order' && page === 'home') {
+    } else if (page === 'menu') {
+      setCurrentPage('menu');
+      if (category) {
+        setMenuCategory(category);
+      }
+    } else if ((currentPage === 'order' || currentPage === 'menu') && page === 'home') {
       setCurrentPage('home');
     } else {
       scrollToSection(page);
@@ -27,6 +34,10 @@ export default function App() {
   const renderPage = () => {
     if (currentPage === 'order') {
       return <Order setPage={handleNavigation} />;
+    }
+    
+    if (currentPage === 'menu') {
+      return <FullMenu setPage={handleNavigation} activeCategory={menuCategory} />;
     }
     
     return (
