@@ -9,6 +9,7 @@ const Order = ({ setPage }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,9 +57,10 @@ const Order = ({ setPage }) => {
     e.preventDefault();
     
     if (validateForm()) {
-      // Form is valid, handle submission
       console.log('Order form submitted:', formData);
-      // Clear the form
+      
+      setIsSubmitted(true);
+      
       setFormData({
         name: '',
         email: '',
@@ -66,6 +68,10 @@ const Order = ({ setPage }) => {
         tableBooking: ''
       });
       setErrors({});
+      
+      setTimeout(() => {
+        setIsSubmitted(false);
+      }, 3000);
     } else {
       console.log('Form has errors, please fix them');
     }
@@ -125,7 +131,9 @@ const Order = ({ setPage }) => {
         
         <button
           type="submit"
-          className="bg-[#E5E5E5] rounded-md py-3 px-4 text-lg font-bold text-black hover:bg-[#e0e0e0] transition-colors"
+          className={`bg-[#E5E5E5] rounded-md py-3 px-4 text-lg font-bold text-black hover:bg-[#e0e0e0] transition-all duration-300 ${
+            isSubmitted ? 'border-4 border-green-500 shadow-lg' : ''
+          }`}
         >
           Place Order
         </button>
