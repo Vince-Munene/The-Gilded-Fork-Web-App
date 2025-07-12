@@ -1,17 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaArrowCircleRight, FaArrowCircleLeft } from 'react-icons/fa';
 
-const overlayColors = [
+const colors = [
   'rgba(0,0,0,0.5)',
   'rgba(255, 140, 0, 0.5)',
   'rgba(220, 20, 60, 0.5)',
   'rgba(30, 144, 255, 0.5)'
 ];
 
+const name = 'The Guilded Fork';
+
 export default function Carousel({ slides }) {
   const [current, setCurrent] = useState(0);
-  const prevSlide = () => setCurrent(current === 0 ? slides.length - 1 : current - 1);
-  const nextSlide = () => setCurrent(current === slides.length - 1 ? 0 : current + 1);
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent(prev => prev === slides.length - 1 ? 0 : prev + 1);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
+  useEffect(() => {
+    if (text.length < name.length) {
+      const timer = setTimeout(() => {
+        setText(name.slice(0, text.length + 1));
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [text]);
+
+  const prev = () => setCurrent(current === 0 ? slides.length - 1 : current - 1);
+  const next = () => setCurrent(current === slides.length - 1 ? 0 : current + 1);
 
   return (
     <div className="w-full h-[60vh] md:h-screen overflow-hidden relative flex items-center justify-center">
@@ -19,7 +39,7 @@ export default function Carousel({ slides }) {
         className="w-full h-full flex transition-transform ease-out duration-500"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
-        {slides.map((s, idx) => (
+        {slides.slice(0, 4).map((s, idx) => (
           <div
             key={idx}
             className="w-full h-full flex-shrink-0 relative flex items-center justify-center"
@@ -32,13 +52,13 @@ export default function Carousel({ slides }) {
             />
             <div className="absolute w-full h-full flex items-center justify-center top-0 left-0 z-10">
               <div
-                className="flex flex-col items-center justify-center px-8 py-6 rounded-2xl"
-                style={{ background: overlayColors[idx % overlayColors.length], maxWidth: '90vw' }}
+                className="flex flex-col items-center justify-center px-4 py-4 rounded-2xl"
+                style={{ background: colors[idx % colors.length], maxWidth: '28rem', width: '100%' }}
               >
-                <h1 className="text-4xl md:text-6xl font-bold text-yellow-300 shadow-2xl mb-2 text-center" style={{ fontFamily: 'cursive' }}>
-                  The Gilded <br /> Fork
+                <h1 className="text-4xl md:text-6xl font-bold text-yellow-300 shadow-2xl mb-2 text-center" style={{ fontFamily: 'cursive', minHeight: '3.5em', background: 'transparent' }}>
+                  {text}
                 </h1>
-                <p className="text-white text-lg md:text-2xl mb-4 shadow-xl text-center">
+                <p className="text-white text-lg md:text-2xl mb-4 shadow-xl text-center" style={{ background: 'transparent' }}>
                   Where Culinary Art Meets Timeless Tradition
                 </p>
                 <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-full shadow-xl transition">
@@ -50,7 +70,7 @@ export default function Carousel({ slides }) {
         ))}
       </div>
       <button
-        onClick={prevSlide}
+        onClick={prev}
         className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 hover:bg-yellow-400 text-yellow-600 hover:text-white rounded-xl w-12 h-16 flex items-center justify-center transition focus:outline-none"
         aria-label="Previous Slide"
         tabIndex={0}
@@ -59,7 +79,7 @@ export default function Carousel({ slides }) {
         <FaArrowCircleLeft size={36} />
       </button>
       <button
-        onClick={nextSlide}
+        onClick={next}
         className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 bg-white bg-opacity-80 hover:bg-yellow-400 text-yellow-600 hover:text-white rounded-xl w-12 h-16 flex items-center justify-center transition focus:outline-none"
         aria-label="Next Slide"
         tabIndex={0}
