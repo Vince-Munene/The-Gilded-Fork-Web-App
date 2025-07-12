@@ -5,7 +5,6 @@ const FullMenu = ({ setPage, activeCategory = 'starters' }) => {
 
   useEffect(() => {
     setCurrentCategory(activeCategory);
-    // Scroll to the active category section
     const element = document.getElementById(activeCategory);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
