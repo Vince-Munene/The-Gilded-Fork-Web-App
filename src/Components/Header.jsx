@@ -33,10 +33,10 @@ function MenuDropdown({ setPage }) {
           id="dropdown"
           className="absolute mt-4 w-40 bg-white dark:bg-[#333] border dark:border-gray-700 rounded-md shadow-md z-10"
         >
-          <button onClick={() => { setPage('starters'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Starters</button>
-          <button onClick={() => { setPage('mains'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Mains</button>
-          <button onClick={() => { setPage('desserts'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Desserts</button>
-          <button onClick={() => { setPage('drinks'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Drinks</button>
+          <button onClick={() => { setPage('menu', 'starters'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Starters</button>
+          <button onClick={() => { setPage('menu', 'mains'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Mains</button>
+          <button onClick={() => { setPage('menu', 'desserts'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Desserts</button>
+          <button onClick={() => { setPage('menu', 'drinks'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Drinks</button>
         </div>
       )}
     </div>
