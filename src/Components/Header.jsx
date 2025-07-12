@@ -1,40 +1,42 @@
 import { useState, useRef, useEffect } from "react";
 
 function MenuDropdown({ setPage }) {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const ref = useRef();
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const handleMouseEnter = () => {
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsOpen(false);
+  };
 
   return (
-    <div className="relative" ref={ref}>
+    <div 
+      className="relative" 
+      ref={ref}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <button
         type="button"
         className="font-bold flex items-center text-xl focus:outline-none"
-        onClick={() => setOpen((v) => !v)}
       >
         Menu
         <svg className="ml-1 w-4 h-4 hover:cursor-pointer" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      {open && (
+      {isOpen && (
         <div
           id="dropdown"
           className="absolute mt-4 w-40 bg-white dark:bg-[#333] border dark:border-gray-700 rounded-md shadow-md z-10"
         >
-          <button onClick={() => { setPage('menu', 'starters'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Starters</button>
-          <button onClick={() => { setPage('menu', 'mains'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Mains</button>
-          <button onClick={() => { setPage('menu', 'desserts'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Desserts</button>
-          <button onClick={() => { setPage('menu', 'drinks'); setOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Drinks</button>
+          <button onClick={() => { setPage('menu', 'starters'); setIsOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Starters</button>
+          <button onClick={() => { setPage('menu', 'mains'); setIsOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Main Course</button>
+          <button onClick={() => { setPage('menu', 'desserts'); setIsOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Desserts</button>
+          <button onClick={() => { setPage('menu', 'drinks'); setIsOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Drinks</button>
         </div>
       )}
     </div>
@@ -42,6 +44,24 @@ function MenuDropdown({ setPage }) {
 }
 
 function Header({ setPage, currentPage, darkMode, setDarkMode }) {
+  const [isSticky, setIsSticky] = useState(false);
+
+  // useEffect hook to handle scroll events and make navbar sticky
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsSticky(scrollTop > 0);
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+    
+    // Cleanup function to remove event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   // Helper to handle scroll and exit order page if needed
   function handleNav(e, section) {
     e.preventDefault();
@@ -58,7 +78,11 @@ function Header({ setPage, currentPage, darkMode, setDarkMode }) {
   }
 
   return (
-    <nav className="bg-paleyellow py-4 px-8 rounded-t-xl">
+    <nav className={`bg-paleyellow py-4 px-8 rounded-t-xl transition-all duration-300 ${
+      isSticky 
+        ? 'fixed top-0 left-0 right-0 z-50 shadow-lg' 
+        : 'relative'
+    }`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
 
         <div className="flex items-center">
