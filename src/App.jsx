@@ -69,7 +69,6 @@ export default function App() {
     }
   }, [currentPage, scrollTarget]);
 
-  // Render different pages based on currentPage
   if (currentPage === 'order') {
     return (
       <>
@@ -84,11 +83,10 @@ export default function App() {
     return <FullMenu setPage={handleNavigation} activeCategory={menuCategory} />;
   }
 
-  // Default home page
   return (
     <>
       <Header setPage={handleNavigation} currentPage={currentPage} darkMode={darkMode} setDarkMode={setDarkMode} />
-      <div className='w-screen h-full m-auto' id="home">
+      <div className='w-full h-full m-auto' id="home">
         <Carousel slides={slides}/>
       </div>
       <div id="our-story">
