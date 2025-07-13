@@ -47,23 +47,19 @@ function MenuDropdown({ setPage }) {
 function Header({ setPage, currentPage, darkMode, setDarkMode }) {
   const [isSticky, setIsSticky] = useState(false);
 
-  // useEffect hook to handle scroll events and make navbar sticky
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       setIsSticky(scrollTop > 0);
     };
 
-    // Add scroll event listener
     window.addEventListener('scroll', handleScroll);
-    
-    // Cleanup function to remove event listener
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  // Helper to handle scroll and exit order page if needed
   function handleNav(e, section) {
     e.preventDefault();
     if (currentPage === 'order') {
