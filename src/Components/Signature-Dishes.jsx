@@ -8,8 +8,8 @@ export default function SigDishes() {
 
   const filteredDishes = dishesData.filter(dish => {
     if (activeFilter === "All") return true;
-    if (activeFilter === "Veg") return dish.category === "Veg";
-    if (activeFilter === "Non-Veg") return dish.category === "Non-Veg";
+    if (activeFilter === "Vegetarian") return dish.category === "Vegetarian";
+    if (activeFilter === "Meat-Lover") return dish.category === "Meat-Lover";
     if (activeFilter === "Chef Specials") return dish.isChefSpecial;
     return true;
   });
@@ -32,7 +32,7 @@ export default function SigDishes() {
       </div>
 
       <div className="flex justify-center gap-4 p-4 bg-paleyellow">
-        {["All", "Veg", "Non-Veg", "Chef Specials"].map((filter) => (
+        {["All", "Vegetarian", "Meat-Lover", "Chef Specials"].map((filter) => (
           <button
             key={filter}
             onClick={() => handleFilterChange(filter)}
@@ -67,7 +67,7 @@ export default function SigDishes() {
               <div className="absolute inset-0 bg-black/80 rounded-2xl flex flex-col justify-center items-center p-4 text-white z-10">
                 <h5 className="font-jaro text-xl mb-2">{dish.name}</h5>
                 <p className="font-inder text-sm text-center mb-3">{dish.description}</p>
-                <p className="font-jaro text-2xl text-yellow-300">{dish.price}</p>
+                <p className="font-mono text-2xl text-yellow-300">{dish.price}</p>
                 <div className="flex gap-2 mt-2">
                   <span className="px-2 py-1 bg-yellow-500 text-black text-xs rounded">
                     {dish.category}

@@ -5,7 +5,7 @@ export const dishesData = [
     image: "/assets/pan-seared-duck-confit.jpg",
     description: "Slow-cooked to tender perfection and served over a bed of creamy polenta with a rich cherry and red wine reduction.",
     price: "Ksh 3450",
-    category: "Non-Veg",
+    category: "Meat-Lover",
     isChefSpecial: true
   },
   {
@@ -14,7 +14,7 @@ export const dishesData = [
     image: "/assets/mushroom-truffle-risotto.jpg",
     description: "A rich and creamy Arborio risotto with wild mushrooms, black truffle shavings, and aged Parmesan cheese.",
     price: "Ksh 3000",
-    category: "Veg",
+    category: "Vegetarian",
     isChefSpecial: true
   },
   {
@@ -23,7 +23,7 @@ export const dishesData = [
     image: "/assets/gilded-fork-steak-fries.jpg",
     description: "A perfectly grilled 8oz filet mignon, topped with a savory herb compound butter and served with a side of crisp, golden fries.",
     price: "Ksh 2230",
-    category: "Non-Veg",
+    category: "Meat-Lover",
     isChefSpecial: true
   },
   {
@@ -32,7 +32,7 @@ export const dishesData = [
     image: "/assets/deconstructed-lemon-tart.jpg",
     description: "A vibrant lemon curd served alongside buttery shortbread crumbles, toasted meringue kisses, and a touch of fresh raspberry coulis.",
     price: "Ksh 2980",
-    category: "Veg",
+    category: "Vegetarian",
     isChefSpecial: false
   },
   {
@@ -41,7 +41,7 @@ export const dishesData = [
     image: "/assets/molten-lava-cake.jpg",
     description: "A rich, dark chocolate cake with a warm, gooey center, served with a scoop of vanilla bean ice cream and a dusting of cocoa powder.",
     price: "Ksh 3170",
-    category: "Veg",
+    category: "Vegetarian",
     isChefSpecial: false
   },
   {
@@ -50,7 +50,7 @@ export const dishesData = [
     image: "/assets/salted-caramel-budino.jpg",
     description: "A silky, Italian-style pudding with layers of rich caramel, topped with a sprinkle of sea salt and a delicate dollop of whipped cream.",
     price: "Ksh 4500",
-    category: "Veg",
+    category: "Vegetarian",
     isChefSpecial: false
   },
   {
@@ -59,7 +59,7 @@ export const dishesData = [
     image: "/assets/the-gilded-spritz.jpg",
     description: "A refreshing blend of Aperol, prosecco, and a hint of elderflower liqueur, garnished with a fresh orange twist.",
     price: "Ksh 1200",
-    category: "Veg",
+    category: "Vegetarian",
     isChefSpecial: true
   },
   {
@@ -68,7 +68,7 @@ export const dishesData = [
     image: "/assets/the-smoked-rosemary.jpg",
     description: "A classic Old Fashioned made with small-batch bourbon, aromatic bitters, and served over a single large ice cube with a smoked rosemary sprig.",
     price: "Ksh 1500",
-    category: "Veg",
+    category: "Vegetarian",
     isChefSpecial: true
   },
   {
@@ -77,7 +77,7 @@ export const dishesData = [
     image: "/assets/lavender-haze.jpg",
     description: "A beautifully layered cocktail featuring Empress 1908 Gin, fresh lemon juice, and a house-made lavender honey syrup.",
     price: "Ksh 3450",
-    category: "Veg",
+    category: "Vegetarian",
     isChefSpecial: false
   },
   {
@@ -86,7 +86,7 @@ export const dishesData = [
     image: "/assets/beef-carpaccio.jpg",
     description: "Thinly sliced raw beef tenderloin with extra virgin olive oil, lemon juice, capers, and shaved Parmesan.",
     price: "Ksh 2480",
-    category: "Non-Veg",
+    category: "Meat-Lover",
     isChefSpecial: false
   },
   {
@@ -95,7 +95,7 @@ export const dishesData = [
     image: "/assets/braised-short-rib.jpg",
     description: "Red wine braised beef short rib with creamy mashed potatoes and seasonal vegetables.",
     price: "Ksh 3100",
-    category: "Non-Veg",
+    category: "Meat-Lover",
     isChefSpecial: true
   },
   {
@@ -104,7 +104,7 @@ export const dishesData = [
     image: "/assets/pan-seared-salmon.jpg",
     description: "Atlantic salmon with herb butter sauce, roasted vegetables, and lemon risotto.",
     price: "Ksh 2500",
-    category: "Non-Veg",
+    category: "Meat-Lover",
     isChefSpecial: false
   }
 ]; 
