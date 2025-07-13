@@ -88,7 +88,7 @@ export default function SigDishes() {
         <div className="text-center pb-8 bg-paleyellow">
           <button
             onClick={handleLoadMore}
-            className="px-8 py-3 bg-white text-black font-jaro text-lg rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg"
+            className="px-8 py-3 bg-white dark:bg-black text-black dark:text-white font-jaro text-lg rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg dark:shadow-blue-50"
           >
             Load More Dishes
           </button>
