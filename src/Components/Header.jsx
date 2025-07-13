@@ -2,15 +2,60 @@ import { useState, useRef, useEffect } from "react";
 
 function MenuDropdown({ setPage }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [openedByClick, setOpenedByClick] = useState(false);
   const ref = useRef();
 
   const handleMouseEnter = () => {
-    setIsOpen(true);
+    if (!openedByClick) {
+      setIsOpen(true);
+    }
   };
 
   const handleMouseLeave = () => {
-    setIsOpen(false);
+    if (!openedByClick) {
+      setIsOpen(false);
+    }
   };
+
+  const handleMenuClick = () => {
+    if (isOpen) {
+      setIsOpen(false);
+      setOpenedByClick(false);
+    } else {
+      setIsOpen(true);
+      setOpenedByClick(true);
+    }
+  };
+
+  const handleItemClick = (category) => {
+    setPage('menu', category);
+    setIsOpen(false);
+    setOpenedByClick(false);
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+        setOpenedByClick(false);
+      }
+    }
+    
+    if (openedByClick) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [openedByClick]);
+
+  const menuItems = [
+    { id: 'starters', label: 'Starters' },
+    { id: 'mains', label: 'Main Course' },
+    { id: 'desserts', label: 'Desserts' },
+    { id: 'drinks', label: 'Drinks' }
+  ];
 
   return (
     <div 
@@ -21,22 +66,35 @@ function MenuDropdown({ setPage }) {
     >
       <button
         type="button"
-        className="font-bold flex items-center text-xl focus:outline-none"
+        onClick={handleMenuClick}
+        className="font-bold flex items-center text-xl focus:outline-none hover:text-gray-700 transition-colors duration-200"
       >
         Menu
-        <svg className="ml-1 w-4 h-4 hover:cursor-pointer" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <svg 
+          className={`ml-1 w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2" 
+          viewBox="0 0 24 24"
+        >
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
+      
       {isOpen && (
         <div
           id="dropdown"
-          className="absolute mt-4 w-40 bg-white dark:bg-[#333] border dark:border-gray-700 rounded-md shadow-md z-10"
+          className="absolute mt-2 w-48 bg-white dark:bg-[#333] border dark:border-gray-700 rounded-lg shadow-xl z-10 overflow-hidden"
         >
-          <button onClick={() => { setPage('menu', 'starters'); setIsOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Starters</button>
-          <button onClick={() => { setPage('menu', 'mains'); setIsOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Main Course</button>
-          <button onClick={() => { setPage('menu', 'desserts'); setIsOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Desserts</button>
-          <button onClick={() => { setPage('menu', 'drinks'); setIsOpen(false); }} className="block text-xl px-4 py-2 bg-paleyellow hover:bg-yellow-100 w-full text-left">Drinks</button>
+          {menuItems.map((item) => (
+            <button 
+              key={item.id}
+              onClick={() => handleItemClick(item.id)}
+              className="block w-full text-left px-4 py-3 bg-paleyellow hover:bg-yellow-100 dark:hover:bg-gray-600 transition-all duration-200 font-medium text-gray-800 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white text-lg"
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
       )}
     </div>
@@ -53,7 +111,7 @@ function Header({ setPage, currentPage, darkMode, setDarkMode }) {
     };
 
     window.addEventListener('scroll', handleScroll);
-
+    
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -87,12 +145,12 @@ function Header({ setPage, currentPage, darkMode, setDarkMode }) {
 
         <div className="flex-1 flex justify-center">
           <div className="flex space-x-8 font-jaro text-[15px] text-black items-center">
-            <a href="#home" onClick={e => handleNav(e, 'home')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Home</a>
+            <a href="#home" onClick={e => handleNav(e, 'home')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer hover:text-gray-700 transition-colors duration-200">Home</a>
             <MenuDropdown setPage={setPage} />
-            <a href="#our-story" onClick={e => handleNav(e, 'our-story')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Our Story</a>
-            <a href="#signature-dishes" onClick={e => handleNav(e, 'signature-dishes')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Signature Dishes</a>
-            <a href="#feedback" onClick={e => handleNav(e, 'feedback')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Feedback</a>
-            <button onClick={() => setPage('order')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer">Order</button>
+            <a href="#our-story" onClick={e => handleNav(e, 'our-story')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer hover:text-gray-700 transition-colors duration-200">Our Story</a>
+            <a href="#signature-dishes" onClick={e => handleNav(e, 'signature-dishes')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer hover:text-gray-700 transition-colors duration-200">Signature Dishes</a>
+            <a href="#feedback" onClick={e => handleNav(e, 'feedback')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer hover:text-gray-700 transition-colors duration-200">Feedback</a>
+            <button onClick={() => setPage('order')} className="font-bold text-xl bg-transparent border-none outline-none cursor-pointer hover:text-gray-700 transition-colors duration-200">Order</button>
           </div>
         </div>
   
