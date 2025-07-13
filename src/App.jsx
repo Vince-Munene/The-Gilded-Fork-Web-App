@@ -69,7 +69,6 @@ export default function App() {
     }
   }, [currentPage, scrollTarget]);
 
-  // Render different pages based on currentPage
   if (currentPage === 'order') {
     return (
       <>
@@ -84,7 +83,6 @@ export default function App() {
     return <FullMenu setPage={handleNavigation} activeCategory={menuCategory} />;
   }
 
-  // Default home page
   return (
     <>
       <Header setPage={handleNavigation} currentPage={currentPage} darkMode={darkMode} setDarkMode={setDarkMode} />

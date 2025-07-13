@@ -25,4 +25,15 @@
 
 html {
   @apply bg-paleyellow text-black dark:bg-[#18181b] dark:text-white;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
 }
