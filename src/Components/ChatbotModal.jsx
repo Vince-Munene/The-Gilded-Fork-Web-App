@@ -36,14 +36,12 @@ export default function ChatbotModal({ open, onClose }) {
 
     try {
       // Replace this with your actual API endpoint
-      const res = await axios.post(
-        "https://the-gilded-fork-api.onrender.com/chat",
-        {
-          message: userInput,
-        }
-      );
+      const res = await axios.post("https://8659d293b956.ngrok-free.app/chat", {
+        user_query: userInput,
+      });
+      console.log(res.data.answer);
 
-      const botReply = res.data.reply || "Sorry, I didn't catch that.";
+      const botReply = res.data.answer || "Sorry, I didn't catch that.";
 
       // Replace the "Bruno is thinking..." message with actual reply
       setMessages((prev) =>
