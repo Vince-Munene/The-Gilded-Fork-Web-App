@@ -2,9 +2,9 @@ import React from 'react';
 import { FaRegCommentDots } from 'react-icons/fa';
 
 const tabs = [
-  { label: 'Heritage', color: '#b9976b' },
-  { label: 'Ambiance', color: '#2d3a48' },
-  { label: 'Simplicity', color: '#8d8d9b' }
+  { label: 'Heritage', color: '#8B4513' },
+  { label: 'Ambiance', color: '#2F4F4F' },
+  { label: 'Simplicity', color: '#696969' }
 ];
 
 const inderFont = { fontFamily: 'Inder, Arial, sans-serif' };
@@ -38,14 +38,15 @@ export default function OurStory() {
           {tabs.map((tab, idx) => (
             <div
               key={tab.label}
-              className={`flex-1 flex items-center justify-center font-bold text-white text-base select-none ${idx === 0 ? 'rounded-l-full' : ''} ${idx === tabs.length - 1 ? 'rounded-r-full' : ''} bg-[${tab.color}] dark:bg-[#2e3746]`}
+              className={`flex-1 flex items-center justify-center font-bold text-white text-base select-none ${idx === 0 ? 'rounded-l-full' : ''} ${idx === tabs.length - 1 ? 'rounded-r-full' : ''} dark:bg-[#2e3746]`}
               style={{
                 ...inderFont,
                 height: '100%',
                 fontWeight: 700,
                 fontSize: '1.08rem',
                 letterSpacing: '0.01em',
-                opacity: 1
+                opacity: 1,
+                backgroundColor: tab.color
               }}
             >
               {tab.label}

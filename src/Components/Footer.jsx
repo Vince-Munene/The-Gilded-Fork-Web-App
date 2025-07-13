@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaInstagram, FaXTwitter } from 'react-icons/fa6';
 import { SiGmail } from 'react-icons/si';
 import ChatbotModal from './ChatbotModal';
@@ -20,6 +20,32 @@ function ChatSmileyIcon() {
 
 export default function Footer() {
   const [showChat, setShowChat] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const checkOpeningHours = () => {
+      const now = new Date();
+      const currentDay = now.getDay();
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+      const currentTime = currentHour + currentMinute / 60;
+
+      let open = false;
+
+      if (currentDay >= 1 && currentDay <= 5) {
+        open = currentTime >= 16 && currentTime < 23;
+      } else if (currentDay === 0 || currentDay === 6) {
+        open = currentTime >= 12 && currentTime < 24;
+      }
+
+      setIsOpen(open);
+    };
+
+    checkOpeningHours();
+    const interval = setInterval(checkOpeningHours, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <footer className="w-full bg-[#faf8e6] dark:bg-[#232b38] pt-8 pb-4 px-2 md:px-0 relative" style={inderFont}>
       <div className="max-w-5xl mx-auto grid grid-cols-1 grid-rows-4 lg:grid-cols-2 lg:grid-rows-2 gap-8 items-start text-black dark:text-white">
@@ -46,6 +72,10 @@ export default function Footer() {
             <div className="text-base font-bold mb-1" style={inderFont}>Hours</div>
             <div className="text-sm">Monday - Friday<br />4pm - 11pm</div>
             <div className="text-sm mb-2">Weekends<br />12pm - 12 am</div>
+            <div className="text-base font-bold mt-2 mb-1" style={inderFont}>Status</div>
+            <div className={`text-sm font-semibold ${isOpen ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+              {isOpen ? 'We\'re Open' : 'Currently Closed'}
+            </div>
           </div>
         </div>
         {/* Right Column: Quick Links (top), Map (bottom) */}
