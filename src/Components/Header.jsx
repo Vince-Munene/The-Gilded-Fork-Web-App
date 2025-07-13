@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 function MenuDropdown({ setPage }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -157,33 +158,27 @@ function Header({ setPage, currentPage, darkMode, setDarkMode }) {
         <div className="flex items-center">
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 transition cursor-pointer"
-            aria-label="Toggle dark mode"
+            className={`inline-flex items-center justify-center px-3 py-2 rounded-full transition-all duration-300 cursor-pointer group ${
+              darkMode 
+                ? 'bg-transparent hover:bg-yellow-100 dark:hover:bg-yellow-900' 
+                : 'bg-transparent hover:bg-gray-800 dark:hover:bg-gray-200'
+            }`}
+            aria-label={`Switch to ${darkMode ? 'light' : 'dark'} mode`}
           >
-            <svg
-              width="35"
-              height="35"
-              viewBox="0 0 70 70"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M44.3915 17.5875L51.7707 11.9292L42.4665 11.6667L39.3748 2.91667L36.2832 11.6667L26.979 11.9292L34.3582 17.5875L31.704 26.5125L39.3748 21.2333L47.0457 26.5125L44.3915 17.5875Z"
-                fill="black"
-              />
-              <path
-                d="M57.1958 35.7292L61.9792 32.0833L55.9708 31.9375L53.9583 26.25L51.9458 31.9375L45.9375 32.0833L50.7208 35.7292L49 41.5042L53.9583 38.0917L58.9167 41.5042L57.1958 35.7292Z"
-                fill="black"
-              />
-              <path
-                d="M20.4167 17.5C20.4167 35.2333 34.7667 49.5833 52.5 49.5833C54.0458 49.5833 55.5625 49.4667 57.05 49.2625C52.3542 56.4667 44.2458 61.25 35 61.25C20.5042 61.25 8.75 49.4958 8.75 35C8.75 25.7542 13.5333 17.6458 20.7375 12.95C20.5333 14.4375 20.4167 15.9542 20.4167 17.5Z"
-                fill="black"
-                stroke="black"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+            <div className="flex items-center space-x-2">
+              {darkMode ? (
+                <FaSun className="text-2xl text-yellow-500 group-hover:text-yellow-600 transition-colors duration-300" />
+              ) : (
+                <FaMoon className="text-2xl text-gray-700 dark:text-gray-300 group-hover:text-white dark:group-hover:text-gray-800 transition-colors duration-300" />
+              )}
+              <span className={`text-sm font-medium transition-colors duration-300 ${
+                darkMode 
+                  ? 'text-gray-700 dark:text-gray-300 group-hover:text-gray-800 dark:group-hover:text-gray-900' 
+                  : 'text-gray-700 dark:text-gray-300 group-hover:text-white dark:group-hover:text-gray-800'
+              }`}>
+                {darkMode ? 'Light' : 'Dark'}
+              </span>
+            </div>
           </button>
         </div>
       </div>

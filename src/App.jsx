@@ -86,8 +86,8 @@ export default function App() {
   return (
     <>
       <Header setPage={handleNavigation} currentPage={currentPage} darkMode={darkMode} setDarkMode={setDarkMode} />
-      <div className='w-full h-full m-auto' id="home">
-        <Carousel slides={slides}/>
+      <div className='w-screen h-full m-auto' id="home">
+        <Carousel slides={slides} setPage={handleNavigation}/>
       </div>
       <div id="our-story">
         <OurStory />
